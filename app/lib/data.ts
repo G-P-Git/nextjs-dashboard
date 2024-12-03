@@ -17,6 +17,10 @@ export async function fetchRevenue() {
 
 export async function fetchLatestInvoices() {
   try {
+    console.log("Fetching revenue data...");
+    await new Promise((resolve) => setTimeout(resolve, 5000));
+    console.log("Data fetch completed after 3 seconds.");
+
     const latestInvoices = invoices
       .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
       .slice(0, 5)
@@ -39,6 +43,10 @@ export async function fetchLatestInvoices() {
 
 export async function fetchCardData() {
   try {
+    console.log("Fetching revenue data...");
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    console.log("Data fetch completed after 3 seconds.");
+
     const numberOfInvoices = invoices.length;
     const numberOfCustomers = customers.length;
 
@@ -133,7 +141,7 @@ export async function fetchInvoicesPages(query: string) {
 export async function fetchInvoiceById(id: string) {
   try {
     const invoice = invoices.find((inv) => inv.id === id);
-    if (!invoice) throw new Error("Invoice not found");
+    if (!invoice) return null;
 
     return {
       ...invoice,
